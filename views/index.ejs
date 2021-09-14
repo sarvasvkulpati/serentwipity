@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="/script.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  
+
+  
+
+
+  
+  <% if(!locals.user ) { %>
+
+    <a href="/twitter">login</a>
+
+  <% } else { %>
+
+    <%= user.userName %>
+
+
+    <a onClick="location.reload();"> Get another interesting follower </a>
+
+  <% } %>
+
+
+  <% if(locals.interestingFollower) {%>
+
+      <div class="card">
+
+
+        <img src=<%=interestingFollower.profile_image_url_https.replace('_normal', '')%> > 
+
+
+        <h1> <%=interestingFollower.name%> </h1>
+        
+        
+
+
+        <p> <%=interestingFollower.description.autoLink()%> </p>
+
+        
+
+
+        <div id="followSection">
+
+          <% if(interestingFollower.location != "") { %>
+
+
+            <p>📍<%=interestingFollower.location%> </p>
+          
+          <% } %>
+
+
+          <% if(interestingFollower.url != "") { %>
+        
+            <p>🔗 <%=interestingFollower.url%> </p>
+
+          <% } %>
+
+        </div>
+
+
+       
+        
+
+
+        <div>
+          <p> <strong><%=interestingFollower.followers_count%></strong> Followers </p>
+          <p><strong><%=interestingFollower.friends_count%></strong> Following </p>
+        </div>
+        
+
+
+        <a href= <%= "https://twitter.com/" + interestingFollower.screen_name %> > Go to profile </a>
+
+      </div>
+    
+  <% } %>
+
+  
+</body>
+</html>

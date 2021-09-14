@@ -1,0 +1,32 @@
+@import url('https://rsms.me/inter/inter.css');
+html { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter var', sans-serif; }
+}
+
+
+.card {
+  border-radius: 24px;
+  border: 1px blue;
+  width: 500px;
+  padding: 16px;
+  box-shadow: 0 0 50px #ccc;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+}
+
+img {
+  
+}
+
+
+#followSection {
+  display: flex;
+  flex-direction: row;
+}
+
+#followSection > p{
+  margin-right: 8px;
+}
