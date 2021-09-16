@@ -4,86 +4,109 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="style.css">
+
+
+<link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  
   <script src="/script.js"></script>
   <title>Document</title>
 </head>
 <body>
 
-  
+<nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
 
+  <div class="navbar-brand">
   
+    <div class="navbar-item" > 
+      <h1 class="title ">Serentwipity🐦</h1>
+      
+    
+    </div>
+   
+  </div>
+
+</nav>
 
 
-  
+
+
+
+
+
   <% if(!locals.user ) { %>
-
     <a href="/twitter">login</a>
-
-  <% } else { %>
-
-    <%= user.userName %>
-
-
-    <a onClick="location.reload();"> Get another interesting follower </a>
-
   <% } %>
 
-
+  
   <% if(locals.interestingFollower) {%>
 
-      <div class="card">
+
+   <div class="columns	is-centered is-mobile">
 
 
-        <img src=<%=interestingFollower.profile_image_url_https.replace('_normal', '')%> > 
+      <div class="column is-fullwidth is-one-third-tablet ">
+        <div class="card">
+
+          <div class="card-image">
+
+          <figure class="image is-fullwidth"> 
+          <img src=<%=interestingFollower.profile_image_url_https.replace('_normal', '')%> > 
+          </figure>
+            
+          </div>
+
+          <div class="card-content">
+            <h1 class="title"> <%=interestingFollower.name%> </h1>
+
+            <div class="content" >
+             <p class="has-text-weight-medium	"> <%-interestingFollower.description.autoLink()%> </p>
+            </div>
+           
+
+            <div class="columns is-variable is-1">
+              <% if(interestingFollower.location) { %>
+                <p class="column is-two-fifths">📍<%=interestingFollower.location%> </p>
+              <% } %>
+
+              <% if(interestingFollower.url) { %>
+                
+                <p class="column is-three-fifths">🔗 <%=interestingFollower.url%> </p>
+              <% } %>
+            </div>
+
+            <div >
+              <p> <strong><%=interestingFollower.followers_count%></strong> <span class="has-text-grey-light	">Followers </span></p>
+              <p><strong><%=interestingFollower.friends_count%></strong> <span class="has-text-grey-light	">Following </span></p>
+            </div>
 
 
-        <h1> <%=interestingFollower.name%> </h1>
-        
-        
+            <div class="mt-4"> 
+             <a href= <%= "https://twitter.com/" + interestingFollower.screen_name %> target="_blank"> Go to profile </a>
+            
+            
+            </div>
+           
+          </div>
+      </div>
 
 
-        <p> <%=interestingFollower.description.autoLink()%> </p>
 
-        
-
-
-        <div id="followSection">
-
-          <% if(interestingFollower.location != "") { %>
-
-
-            <p>📍<%=interestingFollower.location%> </p>
-          
-          <% } %>
-
-
-          <% if(interestingFollower.url != "") { %>
-        
-            <p>🔗 <%=interestingFollower.url%> </p>
-
-          <% } %>
-
-        </div>
-
+        <a class="mt-4 button is-medium is-fullwidth is-primary" onClick="location.reload();"> <p class="has-text-weight-semibold">Get another interesting follower</p> </a>
 
        
-        
-
-
-        <div>
-          <p> <strong><%=interestingFollower.followers_count%></strong> Followers </p>
-          <p><strong><%=interestingFollower.friends_count%></strong> Following </p>
-        </div>
-        
-
-
-        <a href= <%= "https://twitter.com/" + interestingFollower.screen_name %> > Go to profile </a>
-
-      </div>
-    
-  <% } %>
-
   
+
+       
+    
+    </div>
+  
+  
+  </div>
+
+   
+  <% } %>
+  </div>
+
 </body>
 </html>

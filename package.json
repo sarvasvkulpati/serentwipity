@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "autolink-js": "^1.0.2",
     "cookie-parser": "^1.4.5",
     "deta": "^1.0.0",
     "ejs": "^3.1.6",

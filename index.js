@@ -10,7 +10,7 @@ const { TwitterClient } = require('twitter-api-client');
 const deta = Deta('b0f5t1s4_tMDPo7NVk4oJJ4htDd6vCfmiBPANqxHW'); 
 const db = deta.Base('users');  // access your DB
 const followerBase = deta.Base('followers')
-
+const autoLink = require('autolink-js')
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -243,14 +243,3 @@ app.listen(3000, () => {
 });
 
 
-
-/*
-
-userId (key) | name | followers | person they follow's id
----------------------------------------------------------
-
-
-
-
-
-*/
