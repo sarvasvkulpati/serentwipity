@@ -3,30 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <meta name="twitter:title" content="Serentwipity">
+  <meta name="twitter:description" content="Discover your Twitter followers">
+  <meta name="twitter:image" content="https://serentwipity.sarv.repl.co/twitter_post.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+
+
+
+
+
+
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   
-  <script src="/script.js"></script>
-  <title>Document</title>
+ 
+  <title>Serentwipity</title>
 </head>
 <body>
-
-<nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
-
-  <div class="navbar-brand">
-  
-    <div class="navbar-item" > 
-      <h1 class="title ">Serentwipity🐦</h1>
-      
-    
-    </div>
-   
-  </div>
-
-</nav>
 
 
 
@@ -35,23 +34,131 @@
 
 
   <% if(!locals.user ) { %>
-    <a href="/twitter">login</a>
+
+
+      <div class="columns	is-centered is-mobile m-1">
+        <div class="column is-fullwidth is-one-third-tablet ">
+          <div class="has-text-centered m-5">
+            <h1 class="title ">Serentwipity🐦</h1>
+            <h5 class="subtitle is-5 ">Discover your Twitter Followers</h5>
+
+            
+
+      
+          </div>
+
+          <div>
+            <p class="content has-text-weight-medium">You're probably followed by a lot of cool people. Bet you don't know who half of them are. Serentwipity is a way to randomly surface those interesting connections that you're missing out on. 
+          <br>
+            Login and we'll surface an interesting follower every time you refresh.
+            
+            </p>
+
+
+            <a class="button is-primary is-fullwidth mb-2" href="/twitter">Login</a>
+          </div>
+
+          <br><br>
+
+
+          <h1 class="title is-3">Here's what it would look like:</h1>
+
+          <div class="card m-1">
+            <div class="card-image">
+              <figure class="image "> 
+                <img  id="image"> 
+              </figure>
+            </div>
+
+            <div class="card-content">
+              <h1 class="title" id="name"></h1>
+
+              <div class="content" >
+                <p class="has-text-weight-medium" id="description"> </p>
+              </div>
+           
+
+              <div class="columns is-variable is-1">
+                <p class="column is-two-fifths" id="location"></p>
+                <p class="column is-three-fifths"> 
+                  <a id="url" href="" target="_blank" rel="noopener">
+                  </a>
+                </p>
+            </div>
+
+            <div >
+              <p> <strong id="followers"></strong> <span class="has-text-grey-light">Followers </span></p>
+              <p><strong id="following"></strong> <span class="has-text-grey-light	">Following </span></p>
+            </div>
+
+            <div class="my-4"> 
+             <a id="profileUrl" href="" target="_blank" rel="noopener"> Go to profile </a>
+            </div>
+
+             <footer class="card-footer">
+              <a class="mt-4 card-footer-item is-primary button" id="landingRefresh"> <p class="has-text-weight-semibold">Get another interesting follower</p> </a>
+  
+  
+  
+  
+            </footer>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div class="has-text-centered my-5">
+      <h5 class="subtitle is-5 ">Made by <a href="https://twitter.com/SarvasvKulpati" target="_blank" rel="noopener">@Sarv</a> with ❤️ and ☕️</h5>
+    </div>
+
+
+
+      
+  
+    
   <% } %>
 
+  <% if(locals.user && !locals.interestingFollower) {%>
+
+  <div class="columns	is-centered"> 
+
+    <div class="column is-fullwidth is-one-third-tablet "> 
+
+      We're indexing your followers, this may take a minute....
+      <a class="mt-4 card-footer-item is-primary button" onClick="location.reload();"> <p class="has-text-weight-semibold">Refresh</p> </a>
+    
+    </div>
+
+   
   
+  </div>
+   
+
+  <% } %>
+
+
+
   <% if(locals.interestingFollower) {%>
 
-
+  <div class="has-text-centered my-5">
+      <h1 class="title ">Serentwipity🐦</h1>
+      <h5 class="subtitle is-5 ">Discover your Twitter Followers</h5>
+  </div>
    <div class="columns	is-centered is-mobile">
 
 
+
       <div class="column is-fullwidth is-one-third-tablet ">
-        <div class="card">
+        <div class="card m-1">
 
           <div class="card-image">
 
-          <figure class="image is-fullwidth"> 
+          <figure class="image "> 
+  
           <img src=<%=interestingFollower.profile_image_url_https.replace('_normal', '')%> > 
+					
           </figure>
             
           </div>
@@ -71,7 +178,13 @@
 
               <% if(interestingFollower.url) { %>
                 
-                <p class="column is-three-fifths">🔗 <%=interestingFollower.url%> </p>
+                <p class="column is-three-fifths">🔗 
+                
+                <a href=<%=interestingFollower.url%> target="_blank" rel="noopener">
+                 <%=interestingFollower.url%>
+                </a>
+
+                </p>
               <% } %>
             </div>
 
@@ -81,18 +194,28 @@
             </div>
 
 
-            <div class="mt-4"> 
-             <a href= <%= "https://twitter.com/" + interestingFollower.screen_name %> target="_blank"> Go to profile </a>
+            <div class="my-4"> 
+             <a href= <%= "https://twitter.com/" + interestingFollower.screen_name %> target="_blank" rel="noopener"> Go to profile </a>
             
             
             </div>
            
+
+           <footer class="card-footer">
+              <a class="mt-4 card-footer-item is-primary button" onClick="location.reload();"> <p class="has-text-weight-semibold">Get another interesting follower</p> </a>
+  
+  
+  
+  
+            </footer>
           </div>
       </div>
 
 
 
-        <a class="mt-4 button is-medium is-fullwidth is-primary" onClick="location.reload();"> <p class="has-text-weight-semibold">Get another interesting follower</p> </a>
+
+
+       
 
        
   
@@ -104,9 +227,15 @@
   
   </div>
 
+
+  <div class="has-text-centered my-5">
+    
+      <h5 class="subtitle is-5 ">Made by <a href="https://twitter.com/SarvasvKulpati" target="_blank" rel="noopener">@Sarv</a> with ❤️ and ☕️</h5>
+  </div>
+
    
   <% } %>
   </div>
-
+ <script src="/script.js"></script>
 </body>
 </html>
